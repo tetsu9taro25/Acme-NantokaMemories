@@ -28,9 +28,7 @@ my $battery_150 = Acme::NantokaMemories::Item->new(
     },
 );
 
-subtest 'でんこにアイテムを持っていない場合' => sub {
-    is $shiira->item, undef;
-};
+is $shiira->item, undef, 'でんこがアイテムを持っていない場合, undefを返す';
 
 subtest 'でんこにアイテムをもたせられる' => sub {
     $shiira->give_item($battery_50);
@@ -47,8 +45,8 @@ subtest 'でんこがアイテムを利用できる' => sub {
     is $shiira->{hp}, 74;
 
     $shiira->use_item();
-    is $shiira->{hp}, 84;
-    is $shiira->item, undef;
+    is $shiira->{hp}, 84,    'アイテムによって体力が回復している';
+    is $shiira->item, undef, 'アイテムがなくなっている';
 };
 
 done_testing;

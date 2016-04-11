@@ -16,16 +16,13 @@ my $shiira = Acme::NantokaMemories::Denko->new(
     atk  => 50,
 );
 
-my $luna = Acme::NantokaMemories::Denko->new(
-    name => 'ルナ',
-    hp   => 120,
-    atk  => 30,
-);
+$shiira->{hp} -= 10;
+is $shiira->hp, 74;
 
-subtest 'でんこが駅にアクセスできる' => sub {
-    $station->access_by($shiira);
+$shiira->recovery_hp(5);
+is $shiira->hp, 79, 'でんこの体力が回復する';
 
-    is $station->linked_by, $shiira;
-};
+$shiira->recovery_hp(10);
+is $shiira->hp, 84, 'でんこの体力が上限以上に回復しない';
 
 done_testing;

@@ -22,37 +22,25 @@ my $luna = Acme::NantokaMemories::Denko->new(
     atk  => 30,
 );
 
-subtest 'でんこが駅にアクセスできる' => sub {
-    subtest 'しいら: アクセス1回目' => sub {
-        $station->access_by($shiira);
-        is $station->linked_by, $shiira;
-    };
+$station->access_by($shiira);
 
+subtest 'でんこが駅にアクセスした際, バトルが起きる' => sub {
     subtest 'ルナ: アクセス1回目' => sub {
         $station->access_by($luna);
-        is $station->linked_by, $shiira;
-
-        subtest 'しいらの体力が減っている' => sub {
-            is $shiira->hp, 54;
-        };
+        is $station->linked_by, $shiira, 'しいらが駅とリンクしている';
+        is $shiira->hp, 54, 'しいらの体力が減っている';
     };
 
     subtest 'ルナ: アクセス2回目' => sub {
         $station->access_by($luna);
-        is $station->linked_by, $shiira;
-
-        subtest 'しいらの体力が減っている' => sub {
-            is $shiira->hp, 24;
-        };
+        is $station->linked_by, $shiira, 'しいらが駅とリンクしている';
+        is $shiira->hp, 24, 'しいらの体力が減っている';
     };
 
     subtest 'ルナ: アクセス3回目' => sub {
         $station->access_by($luna);
-        is $station->linked_by, $luna;
-
-        subtest 'しいらの体力が回復している' => sub {
-            is $shiira->hp, 84;
-        };
+        is $station->linked_by, $luna, 'ルナが駅とリンクしている';
+        is $shiira->hp, 84, 'しいらの体力が回復している';
     };
 };
 

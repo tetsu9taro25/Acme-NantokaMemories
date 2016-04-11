@@ -25,10 +25,7 @@ subtest 'リンク済みのでんこが駅にアクセスした場合, バトル
     subtest 'しいら: アクセス2回目' => sub {
         $station->access_by($shiira);
         is $station->linked_by, $shiira;
-
-        subtest 'しいらのHPが減っていない' => sub {
-            is $shiira->hp, 84;
-        };
+        is $shiira->hp, 84, 'しいらの体力が減っていない';
     };
 };
 
